@@ -1,0 +1,7 @@
+.block {
+    flex: 1;
+    overflow: hidden;
+}
+.hblock {
+    height: 800px;
+}
