@@ -4,6 +4,7 @@ logs
 npm-debug.log*
 *.lock
 
+/.idea
 # Dependency directories
 package-lock.json
 /node_modules
