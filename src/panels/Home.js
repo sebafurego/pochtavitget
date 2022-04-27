@@ -1,42 +1,33 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import $ from "jquery"
-import { Icon28TearOffFlyerOutline } from '@vkontakte/icons';
+import {Icon24Add, Icon28TearOffFlyerOutline} from '@vkontakte/icons';
 import {
     Panel,
     PanelHeader,
-    Header,
-    Button,
-    Group,
-    Cell,
     Tooltip,
-    Div,
     SplitLayout,
     SplitCol,
     Avatar,
-    Title,
     View,
     Snackbar,
-    IconButton, Subhead
+    IconButton
 } from '@vkontakte/vkui';
 import EditPopout from "../components/EditPopout";
 import Main from "../rest/Main";
 import {Icon16Done, Icon28InfoOutline} from "@vkontakte/icons";
 import {Icon28EditOutline} from "@vkontakte/icons";
-import InfoPopout from "../components/InfoPopout";
 import SuccessAddedPopout from "../components/SuccessAddedPopout";
-import AdminTextPopout from "../components/AdminTextPopout";
 import AdminModal from "../components/AdminModal";
 
-const Home = ({id, user_id, group_role, bridge, setGroupRole, setGroupId, vk_group_id, setScreenSpinner}) => {
+const Home = ({id,setActivePanel, user_id, group_role, bridge, setGroupRole, setGroupId, vk_group_id, setScreenSpinner}) => {
     const [mapId, setMapID] = useState(null);
     const [modal,setModal] = useState(null)
     const [popout, setPopout] = useState(null);
     const [snack, setSnack] = useState(null);
     const [tooltip, setToolTip] = useState(false)
-    const initMap = (snapshot) => {
-        const data = snapshot.val();
+    const initMap = (data) => {
 
+        //const data = snapshot.val();
         if (data === null)
             setMapID(25347)
         else setMapID(data)
@@ -68,13 +59,19 @@ const Home = ({id, user_id, group_role, bridge, setGroupRole, setGroupId, vk_gro
                     containerId: 'ecom-widget'
                 });
             } catch (e) {
-                console.log("error load map#1", e)
                 startWidjet()
             }
 
             setScreenSpinner(null)
         }
     }, [mapId])
+    useEffect(()=>{
+       if(vk_group_id){
+           Main.get(vk_group_id, initMap);
+       } else{
+           setMapID(25347)
+       }
+    },[])
     useEffect(() => {
         if (vk_group_id !== null)
             Main.get(vk_group_id, initMap);
@@ -111,7 +108,6 @@ const Home = ({id, user_id, group_role, bridge, setGroupRole, setGroupId, vk_gro
                     setModal("info")
                     //Q!!
                 }
-                console.log("!", r)
             });
         }
     }, [group_role, vk_group_id])
@@ -140,9 +136,6 @@ const Home = ({id, user_id, group_role, bridge, setGroupRole, setGroupId, vk_gro
             }
         });
     }
-    const openInfo = () => {
-        setPopout(<InfoPopout setPopout={setPopout} addToGroup={addToGroup}/>)
-    }
     const closeTooltip = () => {
         setToolTip(false)
         let s = {
@@ -151,20 +144,27 @@ const Home = ({id, user_id, group_role, bridge, setGroupRole, setGroupId, vk_gro
         }
         bridge.send("VKWebAppStorageSet", {"key": `${vk_group_id}_${user_id}`, "value": JSON.stringify(s)});
     }
-
     return (
-        <SplitLayout modal={<AdminModal setModal={modalBack} modal={modal}/>}>
+        <SplitLayout modal={<AdminModal bridge={bridge} setModal={modalBack} modal={modal}/>}>
             <SplitCol>
                 <View activePanel={id} popout={popout}>
                     <Panel id={id}>
+
                         <div className='block'>
-                            <div className={"header"}>
+                            <PanelHeader>Почта России</PanelHeader>
+                            {/*<div className={"header"}>
                                 <Subhead weight={"medium"} style={{color:"white"}}>
                                     Выберите на карте удобное вам отделение получения или почтомат и сообщите продавцу индекс выбранной точки
                                 </Subhead>
-                            </div>
+                            </div>*/}
                             <div className='hblock' data-id={mapId} id='ecom-widget'/>
                             <div className="admin_buttons">
+                                {(!group_role || group_role !== "admin") &&
+                                    <IconButton style={{marginRight: 15}} className={"edit_but but_color"}
+                                                onClick={() => addToGroup()}>
+                                        <Icon24Add width={28} height={28}/>
+                                    </IconButton>
+                                }
                                 {group_role && group_role === "admin" &&
                                 <IconButton style={{marginRight: 15}} className={"edit_but but_color"}
                                             onClick={() => setModal("info")}>
@@ -183,7 +183,8 @@ const Home = ({id, user_id, group_role, bridge, setGroupRole, setGroupId, vk_gro
                                     </IconButton>
                                 </Tooltip>
                                 }
-                                <IconButton style={{marginLeft: 15}} className={"edit_but but_color"} onClick={openInfo}>
+                                {/*openInfo*/}
+                                <IconButton style={{marginLeft: 15}} className={"edit_but but_color"} onClick={()=>setActivePanel("onvboa")}>
                                     <Icon28InfoOutline/>
                                 </IconButton>
                             </div>

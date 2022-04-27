@@ -1,11 +1,22 @@
-import React,{useState} from "react"
+import React from "react"
 import {
     ModalRoot,
     ModalPage,
     ModalPageHeader,
-    PanelHeaderBack, Title, Group, Subhead
+    PanelHeaderBack, Group, Subhead
 } from "@vkontakte/vkui"
-const AdminModal = ({modal,setModal}) =>{
+import i1 from "../img/i1.png"
+import i2 from "../img/i2.png"
+import i3 from "../img/i3.png"
+import i4 from "../img/i4.png"
+import i5 from "../img/i5.png"
+import i6 from "../img/i6.png"
+const AdminModal = ({modal,setModal,bridge}) =>{
+    const openImages = (imgs) =>{
+        bridge.send("VKWebAppShowImages", {
+            images: imgs
+        });
+    }
     return (
         <ModalRoot
             activeModal={modal}
@@ -26,29 +37,84 @@ const AdminModal = ({modal,setModal}) =>{
                 }
             >
                 <Group style={{padding:20}}>
-                    <Subhead weight={"2"} >Заходим на сайт виджета почты и добавляем виджет</Subhead>
-                    <img style={{width:"100%"}} src={"https://sebafurego.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2e712720-adf1-497e-ae94-a4df48e8dfa2%2F%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-03-22_%D0%B2_09.26.12.png?table=block&id=8cd92280-b492-40cd-9f24-a12a7120f45d&spaceId=d76aa032-4d2c-4c22-9021-79ed69e552a8&width=2000&userId=&cache=v2"}/>
-                    <Subhead weight={"2"} >
-                        В окне вводим url адрес сайта. На данный момент это адрес расположения приложения.
-                    </Subhead>
-                    <div style={{userSelect:"text",marginTop:10,marginBottom:15}}>
-                        <code >
-                            {document.location.href.split("?")[0]}
-                        </code>
-                    </div>
-
-                    <img style={{width:"100%"}} src={"https://sebafurego.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F75f428e2-dce6-4ba9-b37a-a0ddbf96c2ff%2F%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-03-22_%D0%B2_09.27.22.png?table=block&id=0b1eb875-c773-4782-90a8-a8e488e18452&spaceId=d76aa032-4d2c-4c22-9021-79ed69e552a8&width=2000&userId=&cache=v2"}/>
-                    <Subhead weight={"2"} >
-                        В настройка виджета выбираем параметры необходимые для настройки виджета.
-                    </Subhead>
-                    <img style={{width:"100%"}} src={"https://sebafurego.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fd4a7693b-67c6-487b-953a-a6fb8c12cafb%2F%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-03-22_%D0%B2_09.28.04.png?table=block&id=1e1b393a-58a0-4332-b019-1d047907dede&spaceId=d76aa032-4d2c-4c22-9021-79ed69e552a8&width=2000&userId=&cache=v2"}/>
-                    <Subhead weight={"2"} >
-                        После чего в разделе код виджета копируем идентификатор виджета
-                    </Subhead>
-                    <img style={{width:"100%"}} src={"https://sebafurego.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff2d95e61-5c5b-43d0-9c87-bf3462f95973%2F%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2022-03-22_%D0%B2_09.28.52.png?table=block&id=e5cf3772-52a7-4eb1-b8d6-1fc1ed56372d&spaceId=d76aa032-4d2c-4c22-9021-79ed69e552a8&width=2000&userId=&cache=v2"}/>
 
                     <Subhead weight={"2"} >
-                        Далее в приложении вы найдете кнопку с карандшиком, нажав на неё у вас появится окно, куда и требуется добавить скопированный индетификатор.
+                        Приветствуем вас в приложении Почты России!
+                        <br/><br/>
+                        Для работы с приложением вам необходимо заключить договор с Почтой России, это быстро и бесплатно
+                        <br/><a href={"https://otpravka.pochta.ru/"} target={"_blank"}>https://otpravka.pochta.ru/</a>
+                    </Subhead>
+                    <img alt={""} onClick={()=>openImages([i1])} style={{width:"100%"}} src={i1}/>
+                    <Subhead style={{marginTop:20}} weight={"2"} >
+                        Если у вас уже есть договор и Личный Кабинет юридического лица, вам необходимо авторизоваться с логином и паролем от Личного Кабинета на странице
+                        <br/>
+                        <a href={"https://widget.pochta.ru/"} target={"_blank"}> https://widget.pochta.ru/</a>
+                        <br/>
+                        С правой стороны нажать на кнопку Добавить, и в появившемся окне вписать адрес
+                        <br/><a href={"https://cms.pochta.ru/vk"} target={"_blank"}>  https://cms.pochta.ru/vk</a>
+
+                    </Subhead>
+                    <img alt={""} onClick={()=>openImages([i2])} style={{width:"100%"}} src={i2}/>
+
+                    <Subhead style={{marginTop:20}} weight={"2"} >
+                        Указанный сайт автоматически добавится в список «Мои сайты».
+                        Далее необходимо нажать на название сайта в разделе «Мои сайты» и выполнить ряд настроек.
+                    </Subhead>
+                    <img alt={""} onClick={()=>openImages([i3])} style={{width:"100%"}} src={i3}/>
+                    {/*document.location.href.split("?")[0]*/}
+                    <ul style={{paddingLeft:20}}>
+                        <li>
+                          В поле “Индекс отправителя” введите точку сдачи (индекс), который указан в вашем Личном Кабинете Почты России. Это точка,откуда вы будете осуществлять отправления. С неё же будут осуществляться все расчеты стоимости и сроков доставки.
+                        </li>
+                        <li>
+                           В поле “средняя стоимость вложений” укажите среднюю стоимость товаров в вашем обычном отправлении. Обратите внимание,что этот параметр будет объявлять объявленную ценность вложений и влиять на стоимость отправки. Если вы хотите создавать отправления без объявленной ценности,укажите в этом параметре 0.
+                        </li>
+                        <li>
+                            В поле “Вес по умолчанию” укажите средний вес вашего обычного отправления. Это число будет использоваться в приблизительных расчетах доставки на карте.
+                        </li>
+                        <li>
+                            В поле “Добавочный вес” укажите вес упаковки или оставьте это поле пустым.
+                        </li>
+                        <li>
+                           В разделе “Тип и приоритет доставки” выберите желаемые тарифы и поставьте галочку в чек-бокс “Использовать наиболее выгодный тариф”.
+                        </li>
+                        <li>
+                            В разделе “Отделения на карте” выберите отделения и/или почтоматы для отображения на карте. Обратите внимание,что при выборе пункта “почтоматы” вам необходимо указать типоразмер отправлений.
+                        </li>
+                        <li>
+                            В разделе “Сроки и стоимость доставки” выберите необходимую наценку или скидку, настройте отображение сроков доставки и укажите дополнительное время обработки заказа.
+                        </li>
+                        <li>
+                            При необходимости выберите дополнительные платные опции.
+                        </li>
+                        <li>
+                            Нажмите кнопку “сохранить”.
+                        </li>
+                        <li>
+                            Перейдите в раздел  “Код виджета” и скопируйте уникальный id настроенного виджета.
+                        </li>
+                        <img alt={""} onClick={()=>openImages([i4])} style={{width:"100%"}} src={i4}/>
+                        <li>
+                            Перейдите в приложение Вконтакте<br/>
+                            Почта России
+                        </li>
+                        <li>
+                            Далее нажмите на кнопку информации: синяя кнопка с значком “i”
+                        </li>
+                        <img alt={""} onClick={()=>openImages([i5])} style={{width:"100%"}} src={i5}/>
+                        <li>
+                            После чего появится сообщение что вы можете добавить себе приложение в сообщество
+                        </li>
+                        <img alt={""} onClick={()=>openImages([i6])} style={{width:"100%"}} src={i6}/>
+                        <li>
+                            После того как приложение добавлено в сообщество и при условии что вы являетесь администратором у вас появится возможность добавить идентификатор карты: синяя кнопка с карандашиком. В появившемся окне вставьте идентификатор и сохраните.
+                        </li>
+                        <li>
+                            Настройки завершены, приложение готово к работе.
+                        </li>
+                    </ul>
+                    <Subhead style={{marginTop:20}} weight={"2"} >
+                        Вы можете отправить покупателям ссылку на приложение, чтобы они передали вам индекс, по которому им удобно получить отправление.
                     </Subhead>
                 </Group>
 

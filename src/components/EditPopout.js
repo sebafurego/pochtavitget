@@ -40,7 +40,7 @@ const EditPopout = ({setPopout,id,saveEdit}) =>{
                         : ""
                 }
             >
-                <Input onChange={()=>setError(false)} id={"map_id"} defaultValue={id}/>
+                <Input type={"number"} maxLength={10} max={10} onChange={()=>setError(false)} id={"map_id"} defaultValue={id}/>
             </FormItem>
         </Alert>
     )
