@@ -48,7 +48,7 @@ const App = ({}) => {
 			if(!onboarding.keys[0].value){
 				setActivePanel("onvboa")
 			}
-			setPopout(null)
+
 
 			/*let data = {
 				...Object.fromEntries(new URLSearchParams(location.search)),

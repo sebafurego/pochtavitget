@@ -31,6 +31,7 @@ const Home = ({id,setActivePanel, user_id, group_role, bridge, setGroupRole, set
         if (data === null)
             setMapID(25347)
         else setMapID(data)
+        setScreenSpinner(null)
     }
     const startWidjet = () => {
         try {
@@ -62,7 +63,7 @@ const Home = ({id,setActivePanel, user_id, group_role, bridge, setGroupRole, set
                 startWidjet()
             }
 
-            setScreenSpinner(null)
+
         }
     }, [mapId])
     useEffect(()=>{
