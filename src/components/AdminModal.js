@@ -95,7 +95,7 @@ const AdminModal = ({modal,setModal,bridge}) =>{
                         </li>
                         <img alt={""} onClick={()=>openImages([i4])} style={{width:"100%"}} src={i4}/>
                         <li>
-                            Перейдите в приложение Вконтакте<br/>
+                            Перейдите в приложение ВКонтакте<br/>
                             Почта России
                         </li>
                         <li>

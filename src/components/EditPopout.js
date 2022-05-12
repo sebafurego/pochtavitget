@@ -16,27 +16,28 @@ const EditPopout = ({setPopout,id,saveEdit}) =>{
         <Alert
             actions={[
                 {
-                    title: "Сохранить",
-                    mode: "commerce",
-                    action: () => sendResult()
-                },
-                {
                     title: "Отмена",
                     autoclose: true,
-                    mode: "destructive",
+                    mode: "cancel",
                 },
+                {
+                    title: "Сохранить",
+                    mode: "default",
+                    action: () => sendResult()
+                },
+
             ]}
             actionsLayout="horizontal"
             onClose={()=>setPopout(null)}
             header="Редактирование"
-            text="Измените индетификатор отображеммой карты"
+            text="Измените идентификатор отображаемой карты"
         >
             <FormItem
                 style={{paddingRight:0,paddingLeft:0,marginTop:20}}
                 status={error ? "error" : ""}
                 bottom={
                     error
-                        ? "Введите индетификатор"
+                        ? "Введите идентификатор"
                         : ""
                 }
             >

@@ -1,7 +1,8 @@
-body,html{
-    overflow: hidden !important;
+body, html {
+
 }
-.block{
+
+.block {
     width: 100vw;
     height: 99vh;
     display: flex;
@@ -10,78 +11,88 @@ body,html{
     justify-content: stretch;
     overflow: hidden !important;
 }
-.hblock{
-    position: relative;
-    flex: .99991;
-}
-.admin_buttons{
+
+
+
+
+.admin_buttons {
     position: absolute;
     display: flex;
     flex-direction: row;
-    bottom:10px;
+    bottom: 10px;
     justify-content: flex-end;
     width: 95%;
     left: 0;
 }
-.edit_but{
+
+.edit_but {
     background-color: var(--accent);
     color: white;
 }
-.header{
-    background-color: rgba(255,90,0,1);
+
+.header {
+    background-color: rgba(255, 90, 0, 1);
     padding: 10px;
     position: absolute;
     top: 0;
     width: 100%;
 }
-.but_color{
-    background-color: rgba(255,90,0,1);
+
+.but_color {
+    background-color: rgba(255, 90, 0, 1);
 }
 
 .item-enter {
-    transform: translate(200%);
+    position: absolute;
+    transform: translateX(200%);
 }
+
 .item-enter-active {
-    transform: translate(0%);
+    position: absolute;
+    transform: translateX(0%);
     transition: transform 500ms ease-in-out;
 }
+
 .item-exit {
-    transform: translate(0%);
+    position: absolute;
+    transform: translateX(0%);
 }
+
 .item-exit-active {
-    transform: translate(-100%);
+    position: absolute;
+    transform: translateX(-100%);
     transition: transform 300ms ease-in-out;
 }
-.step_board{
-    position: absolute;
-    width: 100vw;
-    height: 60vh;
 
+.step_board {
+    width: 100vw;
+    flex:1;
+    margin-top: 50px;
 }
-.step_board.one{
-    background-color: red;
-}
-.step_board.two{
-    background-color: green;
-}
-.step_board.three{
-    background-color: yellow;
-}
-.boarding_view{
+
+
+.boarding_view {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    min-height: 99vh;
+    max-height: 1000vh;
 }
-.step_board{
+.sdfjksdjhkjk{
+    overflow: auto;
+    overflow-x: hidden;
+}
+.step_board {
     flex-direction: column;
     align-items: center;
     justify-content: center;
     display: flex;
 
 }
-.boarding_buttons{
-    bottom: 50px;
-    position: absolute;
+
+.boarding_buttons {
+    margin-bottom: 10px;
     width: 80%;
     display: flex;
     align-self: center;
@@ -90,12 +101,14 @@ body,html{
     justify-content: center;
     align-items: center;
 }
-.boarding_bottom{
+
+.boarding_bottom {
     margin-bottom: 25px;
-    box-shadow: inset 0 0 0 1px rgba(255,90,0,1) !important;
-    color: rgba(255,90,0,1) !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 90, 0, 1) !important;
+    color: rgba(255, 90, 0, 1) !important;
 }
-.boarding_indicators{
+
+.boarding_indicators {
     display: flex;
     flex-direction: row;
     z-index: 22;
@@ -103,35 +116,99 @@ body,html{
     justify-content: space-between;
     align-items: center;
 }
-.indicator{
+
+.indicator {
     border-radius: 100%;
     width: 12px;
     height: 12px;
     background-color: rgba(231, 231, 231, 0.8);
     transition: all 9ms;
 }
-.indicators_div{
+
+.indicators_div {
     flex: .5;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.indicator.on{
+
+.indicator.on {
     transition: all 9ms;
 
     width: 15px;
     height: 15px;
-    background-color: rgba(100,100,100,.3);
+    background-color: rgba(100, 100, 100, .3);
 }
-.boarding_indicators button{
+
+.boarding_indicators button {
     border-radius: 100%;
     outline: none;
-    border: 1px solid rgba(255,90,0,1);
+    border: 1px solid rgba(255, 90, 0, 1);
     width: 45px;
     height: 45px;
-    background-color: rgba(0,0,0,0);
-    color:rgba(255,90,0,1);
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(255, 90, 0, 1);
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.this_is_trans_{
+    width: 100vw;
+}
+
+
+.item-left-enter {
+    position: absolute;
+    transform: translateX(-200%);
+}
+
+.item-left-enter-active {
+    position: absolute;
+    transform: translateX(0%);
+    transition: transform 500ms ease-in-out;
+}
+
+.item-left-exit {
+    position: absolute;
+    transform: translateX(0%);
+}
+
+.item-left-exit-active {
+    position: absolute;
+    transform: translateX(100%);
+    transition: transform 300ms ease-in-out;
+}
+.error_map{
+
+}
+.img_d{
+    
+}
+.step_board{
+}
+/*
+.img_d.z{
+    width: 20vh;
+    height: 20vh;
+}*/
+
+.hblock {
+    position: relative !important;
+    width: 97vw;
+    overflow: hidden !important;
+    overflow-block: hidden !important;
+}
+.map__{
+    height: 100%;
+    overflow: hidden !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#map{
+    overflow: hidden !important;
+}
+.map_load_spinner{
+    position: absolute;
 }

@@ -17,7 +17,16 @@ const App = ({}) => {
 	const [group_role,setGroupRole] = useState(null);
 	const [activePanel, setActivePanel] = useState('home');
 	const [fetchedUser, setUser] = useState(null);
-	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
+	const [popout, setPopout] = useState(null);
+
+/*	useEffect(()=>{
+		window.onpopstate = () =>{
+			if(popout){
+				setPopout(null)
+				return false
+			}
+		}
+	},[])*/
 
 
 	useEffect(() => {
@@ -42,6 +51,7 @@ const App = ({}) => {
 					setGroupId(grp_stor.keys[0].value)
 				}
 			}
+			bridge.send("VKWebAppSetViewSettings", {"status_bar_style": "dark", "action_bar_color": "#fff"}).catch(()=>{});
 			setUser(user);
 			let onboarding = await bridge.send("VKWebAppStorageGet", {"keys": ["onboarding"]});
 

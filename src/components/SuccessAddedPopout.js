@@ -15,7 +15,7 @@ const SuccessAddedPopout = ({setPopout}) =>{
             actionsLayout="horizontal"
             onClose={()=>setPopout(null)}
             header=""
-            text="Отлично, теперь можете отредактироваать индетификатор для своей карты"
+            text="Отлично, теперь можете отредактировать идентификатор для своей карты"
         />
     )
 }
