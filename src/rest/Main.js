@@ -1,8 +1,24 @@
 class Main {
 
+    getMapId(grp_id,callback){
+        fetch("https://lila.deacrm.ru/rest/codes1?vk_group_id="+grp_id, {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(r=>r.json()).then(r=>{
+            callback(r.data.length > 0 ? r.data[0].code : null)
+        });
+
+    }
+
     // FIREBASE ПЕРЕМЕННЫЕ
     get(vk_group_id,callback){
-        fetch("https://lila.deacrm.ru/rest/codes"+location.search, {
+        let dd = location.search;
+        if(dd.indexOf("vk_group_id") === -1 && vk_group_id){
+            dd += "&vk_group_id="+vk_group_id
+        }
+        fetch("https://lila.deacrm.ru/rest/codes"+dd, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
             headers: {
                 'Content-Type': 'application/json'

@@ -7,10 +7,14 @@ import Home from './panels/Home';
 import OnBoarding from "./components/OnBoarding";
 const url = new URL(document.location.href)
 let user_id = 0;
+let group_idd = null;
+let url_search1 = url.search.split("&");
+
 
 
 //TEST PULL
 const App = ({}) => {
+
 	const [group_id,setGroupId] = useState(null);
 	const group_idRef = useRef();
 	group_idRef.current = group_id;
@@ -47,7 +51,9 @@ const App = ({}) => {
 			const user = await bridge.send('VKWebAppGetUserInfo');
 			if(!group_idRef.current){
 				let grp_stor = await bridge.send("VKWebAppStorageGet", {"keys": ["vk_group"]});
+				console.log(grp_stor)
 				if(grp_stor.keys[0].value){
+					group_idd = grp_stor.keys[0].value
 					setGroupId(grp_stor.keys[0].value)
 				}
 			}
@@ -96,6 +102,12 @@ const App = ({}) => {
 		bridge.send("VKWebAppStorageSet", {"key": "onboarding", "value": "true"});
 		setActivePanel("home")
 	}
+	useEffect(()=>{
+		const script = document.createElement("script");
+		script.src = "https://widget.pochta.ru/map/widget/widget.js";
+		script.async = true;
+		document.body.appendChild(script);
+	},[])
 	return (
 			<AdaptivityProvider >
 				<AppRoot >
@@ -106,7 +118,7 @@ const App = ({}) => {
 								  bridge={bridge}
 								  setScreenSpinner={setPopout}
 								  group_role={group_role}
-								  setGroupId={setGroupId} vk_group_id={group_id} id='home' fetchedUser={fetchedUser} go={go} />
+								  setGroupId={setGroupId} vk_group_id={group_idd} id='home' fetchedUser={fetchedUser} go={go} />
 					</View>
 				</AppRoot>
 			</AdaptivityProvider>

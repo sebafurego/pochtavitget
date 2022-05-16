@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, {useEffect, useState} from "react";
 import ReactDOM from "react-dom";
 import bridge from "@vkontakte/vk-bridge";
 import App from "./App";
@@ -15,6 +15,7 @@ document.body.appendChild(script);
 setTimeout(()=>{
   ReactDOM.render(<App />, document.getElementById("root"));
 },1000)
+
 if (process.env.NODE_ENV === "development") {
   import("./eruda").then(({ default: eruda }) => {}); //runtime download
 }

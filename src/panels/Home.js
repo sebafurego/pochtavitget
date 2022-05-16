@@ -42,23 +42,23 @@ const Home = ({
 
         //const data = snapshot.val();
         if (data === null)
-            setMapID(25347)
+            setMapID(25063)
         else setMapID(data)
         setLoadingMap(null)
         //setScreenSpinner(null)
     }
+    useEffect(()=>{
+
+    },[])
     const startWidjet = () => {
         try {
-            const script = document.createElement("script");
-            script.src = "https://widget.pochta.ru/map/widget/widget.js";
-            script.async = true;
-            document.body.appendChild(script);
+
             setTimeout(() => {
                 try {
 
                     ecomStartWidget({
                         id: mapId,
-                        callbackFunction: callBack,
+                        callbackFunction: null,
                         containerId: 'ecom-widget'
                     })
                     setLoadingMap(null)
@@ -94,35 +94,115 @@ const Home = ({
             paramsContainer.appendChild(param);
         }*/
     }
-    useEffect(() => {
+   /* useEffect(() => {
         if (mapId) {
-
             try {
+                alert(mapId)
                 ecomStartWidget({
                     id: mapId,
-                    callbackFunction: callBack,
+                    callbackFunction: null,
                     containerId: 'ecom-widget',
                 })
                 setErrorMap(null)
             } catch (e) {
+                alert("errro1")
                 startWidjet()
 
             }
         }
-    }, [mapId])
-    useEffect(() => {
+    }, [mapId])*/
+/*    useEffect(() => {
         if (vk_group_id) {
             Main.get(vk_group_id, initMap);
         } else {
-            setMapID(25347)
+            setMapID(25063)
         }
-    }, [])
-    useEffect(() => {
-        if (vk_group_id !== null)
-            Main.get(vk_group_id, initMap);
+    }, [])*/
+    useEffect(()=>{
+
+    },[mapId])
+    const setMap = (id) =>{
+        let dd = location.search;
+
+        if(id !== null && dd.indexOf("vk_group_id") === -1){
+            Main.getMapId(id, (data) => {
+                let int = data;
+                if (data === null){
+                    setMapID(25063)
+                    int = 25063
+                }
+                else setMapID(data)
+
+                try {
+                    ecomStartWidget({
+                        id: int,
+                        callbackFunction: null,
+                        containerId: 'ecom-widget',
+                    })
+                    setErrorMap(null)
+                    setLoadingMap(null)
+                } catch (e) {
+                    alert("error init map")
+                }
+            })
+        }
+        else if (id !== null) {
+            Main.get(id, (data) => {
+                let int = data;
+                if (data === null) {
+                    setMapID(25063)
+                    int = 25063
+                }
+                else setMapID(data)
+                try {
+                    ecomStartWidget({
+                        id: int,
+                        callbackFunction: null,
+                        containerId: 'ecom-widget',
+                    })
+                    setErrorMap(null)
+                    setLoadingMap(null)
+                } catch (e) {
+                    alert("error init map")
+                }
+            });
+        }
         else
-            setMapID(25347)
-    }, [vk_group_id])
+        {
+            try {
+                setMapID(25063)
+                ecomStartWidget({
+                    id: 25063,
+                    callbackFunction: null,
+                    containerId: 'ecom-widget',
+                })
+                setErrorMap(null)
+                setLoadingMap(null)
+            } catch (e) {
+                alert("error init map")
+            }
+        }
+    }
+    useEffect(() => {
+        const url = new URL(document.location.href)
+        let group_z = null;
+        let url_search1 = url.search.split("&");
+        for(let i=0;i<url_search1.length;i++){
+            if(url_search1[i].indexOf("vk_group_id") !== -1){
+                group_z = url_search1[i].split("=")[1]
+            }
+        }
+        if(!group_z){
+            bridge.send("VKWebAppStorageGet", {"keys": ["vk_group"]}).then((grp_stor)=>{
+                if(grp_stor.keys[0].value){
+                    setMap(grp_stor.keys[0].value);
+                }
+            });
+        }else
+            setMap();
+
+
+    }, [])
     const setAlert = (sd) => {
         let s = {
             alert: true,
