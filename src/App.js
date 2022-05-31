@@ -51,7 +51,6 @@ const App = ({}) => {
 			const user = await bridge.send('VKWebAppGetUserInfo');
 			if(!group_idRef.current){
 				let grp_stor = await bridge.send("VKWebAppStorageGet", {"keys": ["vk_group"]});
-				console.log(grp_stor)
 				if(grp_stor.keys[0].value){
 					group_idd = grp_stor.keys[0].value
 					setGroupId(grp_stor.keys[0].value)

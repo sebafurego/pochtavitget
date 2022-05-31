@@ -42,7 +42,7 @@ const Home = ({
 
         //const data = snapshot.val();
         if (data === null)
-            setMapID(25063)
+            setMapID(25369)
         else setMapID(data)
         setLoadingMap(null)
         //setScreenSpinner(null)
@@ -115,7 +115,7 @@ const Home = ({
         if (vk_group_id) {
             Main.get(vk_group_id, initMap);
         } else {
-            setMapID(25063)
+            setMapID(25369)
         }
     }, [])*/
     useEffect(()=>{
@@ -125,61 +125,78 @@ const Home = ({
         let dd = location.search;
 
         if(id !== null && dd.indexOf("vk_group_id") === -1){
-            Main.getMapId(id, (data) => {
-                let int = data;
-                if (data === null){
-                    setMapID(25063)
-                    int = 25063
-                }
-                else setMapID(data)
-
-                try {
-                    ecomStartWidget({
-                        id: int,
-                        callbackFunction: null,
-                        containerId: 'ecom-widget',
-                    })
-                    setErrorMap(null)
-                    setLoadingMap(null)
-                } catch (e) {
-                    alert("error init map")
-                }
-            })
-        }
-        else if (id !== null) {
-            Main.get(id, (data) => {
-                let int = data;
-                if (data === null) {
-                    setMapID(25063)
-                    int = 25063
-                }
-                else setMapID(data)
-                try {
-                    ecomStartWidget({
-                        id: int,
-                        callbackFunction: null,
-                        containerId: 'ecom-widget',
-                    })
-                    setErrorMap(null)
-                    setLoadingMap(null)
-                } catch (e) {
-                    alert("error init map")
-                }
-            });
-        }
-        else
-        {
+            setMapID(25369)
+            let int = 25369
             try {
-                setMapID(25063)
                 ecomStartWidget({
-                    id: 25063,
+                    id: int,
                     callbackFunction: null,
                     containerId: 'ecom-widget',
                 })
                 setErrorMap(null)
                 setLoadingMap(null)
             } catch (e) {
-                alert("error init map")
+                setTimeout(()=>{
+                    ecomStartWidget({
+                        id: int,
+                        callbackFunction: null,
+                        containerId: 'ecom-widget',
+                    })
+                    setErrorMap(null)
+                    setLoadingMap(null)
+                },2000)
+            }
+        }
+        else if (id !== null) {
+            Main.get(id, (data) => {
+                let int = data;
+                if (data === null) {
+                    setMapID(25369)
+                    int = 25369
+                }
+                else setMapID(data)
+                try {
+                    ecomStartWidget({
+                        id: int,
+                        callbackFunction: null,
+                        containerId: 'ecom-widget',
+                    })
+                    setErrorMap(null)
+                    setLoadingMap(null)
+                } catch (e) {
+                    setTimeout(()=>{
+                        ecomStartWidget({
+                            id: int,
+                            callbackFunction: null,
+                            containerId: 'ecom-widget',
+                        })
+                        setErrorMap(null)
+                        setLoadingMap(null)
+                    },2000)
+                }
+            });
+        }
+        else
+        {
+            try {
+                setMapID(25369)
+                ecomStartWidget({
+                    id: 25369,
+                    callbackFunction: null,
+                    containerId: 'ecom-widget',
+                })
+                setErrorMap(null)
+                setLoadingMap(null)
+            } catch (e) {
+                setTimeout(()=>{
+                    ecomStartWidget({
+                        id: int,
+                        callbackFunction: null,
+                        containerId: 'ecom-widget',
+                    })
+                    setErrorMap(null)
+                    setLoadingMap(null)
+                },2000)
             }
         }
     }
