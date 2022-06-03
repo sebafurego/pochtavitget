@@ -123,7 +123,7 @@ const Home = ({
     },[mapId])
     const setMap = (id) =>{
         let dd = location.search;
-
+        console.log("CHECK",id,dd)
         if(id !== null && dd.indexOf("vk_group_id") === -1){
             setMapID(25369)
             let int = 25369
@@ -213,6 +213,8 @@ const Home = ({
             bridge.send("VKWebAppStorageGet", {"keys": ["vk_group"]}).then((grp_stor)=>{
                 if(grp_stor.keys[0].value){
                     setMap(grp_stor.keys[0].value);
+                }else{
+                    setMap();
                 }
             });
         }else
