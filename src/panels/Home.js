@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {Icon24Add, Icon28TearOffFlyerOutline} from '@vkontakte/icons';
+import {Icon20Cancel, Icon24Add, Icon28TearOffFlyerOutline} from '@vkontakte/icons';
 import {
     Panel,
     PanelHeader,
@@ -19,7 +19,7 @@ import {Icon28EditOutline} from "@vkontakte/icons";
 import SuccessAddedPopout from "../components/SuccessAddedPopout";
 import AdminModal from "../components/AdminModal";
 import bridge from "@vkontakte/vk-bridge";
-
+import cont from "../img/steps.png"
 const Home = ({
                   id,
                   setActivePanel,
@@ -301,8 +301,23 @@ const Home = ({
             }
         }
     },[])
+    const openPopView = () =>{
+        setPopout(
+            <div className={"pop_prim"}>
+                <div className={"pop_cont"}>
+                    <div style={{right:"-90%",position:"relative",width:20,justifySelf:"right"}}>
+                        <IconButton onClick={()=>setPopout(null)}>
+                            <Icon20Cancel/>
+                        </IconButton>
+                    </div>
+
+                    <img src={cont}/>
+                </div>
+            </div>
+        )
+    }
     return (
-        <SplitLayout style={{overflowY:"hidden"}} modal={<AdminModal bridge={bridge} setModal={modalBack} modal={modal}/>}>
+        <SplitLayout style={{overflowY:"hidden"}} modal={<AdminModal openPopView={openPopView} bridge={bridge} setModal={modalBack} modal={modal}/>}>
             <SplitCol style={{overflowY:"hidden"}}>
                 <View activePanel={id} popout={popout} style={{overflowY:"hidden"}}>
                     <Panel id={id} style={{overflowY:"hidden"}}>
