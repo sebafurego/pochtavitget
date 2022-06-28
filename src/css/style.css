@@ -257,6 +257,11 @@ ul:not(.kk_k) li::before {
 .kk_k{
     list-style: circle;
     padding: 0;
+
+}
+.kk_k li::before{
+    color:var(--accent) !important;
+    background-color: var(--accent) !important;
 }
 .left_right{
     width: 100%;
@@ -298,4 +303,44 @@ ul:not(.kk_k) li::before {
 }
 .checkiin{
 
+}
+
+.kk_k_1 {
+    list-style: none; /* Remove default bullets */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    padding: 0 !important;
+}
+.kk_k_1 li{
+    margin-bottom: 10px;
+    width: 100%;
+}
+.kk_k_1 li::before {
+    content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: var(--accent); /* Change the color */
+    font-weight: bold; /* If you want it to be bold */
+    display: inline-block; /* Needed to add space between the bullet and the text */
+    width: 1em; /* Also needed for space (tweak if needed) */
+    margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
+.notflex{
+    display: block;
+}
+.notflex li{
+    text-align: start;
+}
+.li_with_im{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.flex_diov{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
 }
